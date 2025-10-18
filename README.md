@@ -1,36 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PMP Exam Simulator - Free Practice Platform
 
-## Getting Started
+🎯 **منصّة ويب تفاعلية خفيفة تهدف إلى تدريب المتقدّمين لاختبار PMP عبر تجربة محاكاة قريبة من الامتحان الحقيقي**
 
-First, run the development server:
+## 🧩 وصف المشروع
+
+منصّة ويب تفاعلية خفيفة تهدف إلى تدريب المتقدّمين لاختبار PMP عبر تجربة محاكاة قريبة من الامتحان الحقيقي، دون الحاجة إلى تسجيل أو دفع أي رسوم. تعتمد المنصّة على واجهة حديثة مبنية بـ Next.js مع تصميم أنيق باستخدام Shadcn UI، وتُدار الأسئلة محليًا داخل المتصفّح لضمان السرعة والخصوصية.
+
+## 🧠 الأهداف الرئيسية
+
+- توفير أداة مجانية وسريعة لمراجعة مفاهيم إدارة المشاريع (PMP)
+- مساعدة المستخدمين على قياس جاهزيتهم عبر اختبارات قصيرة وتغذية راجعة فورية
+- تقديم واجهة عصرية سهلة الاستخدام، تعمل على جميع الأجهزة دون أي إعداد أو تسجيل
+
+## 💡 الميزات الأساسية
+
+- 🧾 **بنك أسئلة جاهز** يحتوي على أسئلة اختيار من متعدد (MCQ) متوافقة مع آخر إصدار من PMI ECO
+- ⏱️ **محاكاة الامتحان الحقيقي** مع عدّاد تقدم ونسبة إنجاز
+- 💬 **عرض الشرح بعد الإجابة** لكل سؤال مع توضيح الفكرة والمفهوم
+- 📊 **تقرير نهائي فوري** يُظهر عدد الإجابات الصحيحة والنسبة المئوية
+- 📱 **تصميم متجاوب بالكامل** (Mobile-Friendly)
+- 💾 **عمل بدون اتصال** (Offline Ready) بفضل تخزين الأسئلة في المتصفح
+- 🔒 **بدون تسجيل دخول أو جمع بيانات** — تجربة نظيفة وبسيطة
+
+## 🧰 التقنيات المستخدمة
+
+- **Next.js 15** – إطار عمل React لتطبيقات الويب الحديثة
+- **Shadcn/UI + TailwindCSS** – لتصميم واجهة أنيقة وسريعة الاستجابة
+- **TypeScript** – لضمان الأمان والدقة في كتابة الكود
+- **LocalStorage** – لتخزين التقدّم محليًا في المتصفح
+- **Lucide React** – للأيقونات الحديثة والجميلة
+
+## 🚀 البدء السريع
+
+### المتطلبات الأساسية
+
+- Node.js 18+ 
+- npm أو yarn أو pnpm
+
+### التثبيت
 
 ```bash
+# الانتقال إلى مجلد المشروع
+cd pmp-exam-simulator
+
+# تثبيت التبعيات
+npm install
+
+# تشغيل الخادم المحلي
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+افتح [http://localhost:3000](http://localhost:3000) في متصفحك لرؤية النتيجة.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ⚙️ آلية العمل
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. عند دخول المستخدم للموقع، تظهر واجهة بسيطة بها زر "ابدأ الاختبار"
+2. تُعرض الأسئلة واحدًا تلو الآخر مع أزرار للاختيارات
+3. بعد اختيار الإجابة، يظهر التصحيح والشرح مباشرة
+4. في نهاية الاختبار، يُعرض ملخص الأداء (عدد الإجابات الصحيحة + النسبة)
+5. يمكن للمستخدم إعادة الاختبار في أي وقت بدون أي تسجيل أو حفظ سحابي
 
-## Learn More
+## 🧭 الفئة المستهدفة
 
-To learn more about Next.js, take a look at the following resources:
+- طلاب PMP الراغبون في المراجعة اليومية السريعة
+- المدربون الذين يريدون أداة تعليمية مجانية لتجربة الأسئلة
+- المهنيون الذين يرغبون في اختبار معرفتهم بطريقة ممتعة وسريعة
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📁 هيكل المشروع
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/                    # صفحات Next.js
+│   ├── layout.tsx         # التخطيط الرئيسي
+│   ├── page.tsx           # الصفحة الرئيسية
+│   └── sitemap.ts         # خريطة الموقع
+├── components/            # المكونات القابلة لإعادة الاستخدام
+│   ├── ui/               # مكونات Shadcn UI
+│   ├── ExamComponent.tsx # مكون الاختبار الرئيسي
+│   └── ExamResults.tsx   # مكون عرض النتائج
+├── data/                 # البيانات والمحتوى
+│   └── sampleQuestions.ts # الأسئلة التجريبية
+└── types/                # تعريفات TypeScript
+    └── question.ts       # أنواع البيانات للأسئلة
+```
 
-## Deploy on Vercel
+## 🔧 التخصيص
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### إضافة أسئلة جديدة
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+قم بتحرير ملف `src/data/sampleQuestions.ts` وأضف أسئلة جديدة بالتنسيق التالي:
+
+```typescript
+{
+  id: 'unique-id',
+  question: 'نص السؤال',
+  options: ['الخيار الأول', 'الخيار الثاني', 'الخيار الثالث', 'الخيار الرابع'],
+  correctAnswer: 0, // فهرس الإجابة الصحيحة (0-3)
+  explanation: 'شرح الإجابة الصحيحة',
+  category: 'فئة السؤال',
+  difficulty: 'easy' | 'medium' | 'hard'
+}
+```
+
+## 🚀 النشر
+
+### Vercel (موصى به)
+
+```bash
+# تثبيت Vercel CLI
+npm i -g vercel
+
+# نشر المشروع
+vercel
+```
+
+## ⚠️ إخلاء المسؤولية
+
+هذه المنصة غير مرتبطة بـ PMI. PMP هي علامة تجارية مسجلة لمعهد إدارة المشاريع (Project Management Institute, Inc).
+
+---
+
+**صُنع بـ ❤️ لمجتمع إدارة المشاريع**
