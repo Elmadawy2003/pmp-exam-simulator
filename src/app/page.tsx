@@ -318,7 +318,7 @@ export default function Home() {
               © 2024 PMP Exam Simulator. Free practice platform for PMP certification preparation.
             </p>
             <p className="text-sm">
-              This platform is not affiliated with PMI. PMP is a registered trademark of Project Management Institute, Inc.
+              This platform is a heartfelt tribute to the discipline and professionals of Project Management
             </p>
           </div>
         </div>
