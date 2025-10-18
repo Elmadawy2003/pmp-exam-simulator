@@ -303,7 +303,8 @@ export default function Home() {
               <span>PMI Certification Prep</span>
             </div>
             <div className="mt-4 text-xs text-gray-500">
-              © 2024 Free PMP Exam Simulator. All rights reserved. PMI and PMP are registered trademarks of Project Management Institute, Inc.
+             This platform is a heartfelt tribute to the discipline and professionals of Project Management. 
+             We are committed to providing a free and accessible resource for all PMP candidates.
             </div>
           </div>
         </div>
