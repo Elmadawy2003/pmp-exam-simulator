@@ -28,7 +28,7 @@ const combinedQuestions = [...initialQuestions, ...sampleQuestions1, ...sampleQu
 
 export const allQuestions = combinedQuestions;
 
-// دالة للحصول على أسئلة عشوائية مع تجنب التكرار
+// Function to get random questions while avoiding repetition
 export function getRandomQuestions(count: number, userId?: string): Question[] {
   let availableQuestions = [...combinedQuestions];
   
@@ -37,7 +37,7 @@ export function getRandomQuestions(count: number, userId?: string): Question[] {
     const answeredQuestions = userStorage.getAnsweredQuestions();
     availableQuestions = combinedQuestions.filter(q => !answeredQuestions.has(q.id));
     
-    // إذا لم تكن هناك أسئلة متاحة كافية، أعد تعيين الأسئلة المجابة
+    // If there are not enough available questions, reset answered questions
     if (availableQuestions.length < count) {
       userStorage.resetAnsweredQuestions();
       availableQuestions = [...combinedQuestions];
@@ -48,7 +48,7 @@ export function getRandomQuestions(count: number, userId?: string): Question[] {
   return shuffled.slice(0, count);
 }
 
-// دالة للحصول على أسئلة حسب الفئة مع تجنب التكرار
+// Function to get questions by category while avoiding repetition
 export function getQuestionsByCategory(category: string, userId?: string): Question[] {
   let categoryQuestions = combinedQuestions.filter(q => q.category === category);
   
@@ -61,7 +61,7 @@ export function getQuestionsByCategory(category: string, userId?: string): Quest
   return categoryQuestions;
 }
 
-// دالة للحصول على أسئلة حسب مستوى الصعوبة مع تجنب التكرار
+// Function to get questions by difficulty level while avoiding repetition
 export function getQuestionsByDifficulty(difficulty: 'easy' | 'medium' | 'hard', userId?: string): Question[] {
   let difficultyQuestions = combinedQuestions.filter(q => q.difficulty === difficulty);
   
@@ -74,7 +74,7 @@ export function getQuestionsByDifficulty(difficulty: 'easy' | 'medium' | 'hard',
   return difficultyQuestions;
 }
 
-// دالة للحصول على أسئلة متوازنة من جميع الفئات مع تجنب التكرار
+// Function to get balanced questions from all categories while avoiding repetition
 export function getBalancedQuestions(count: number, userId?: string): Question[] {
   let availableQuestions = [...combinedQuestions];
   
@@ -83,7 +83,7 @@ export function getBalancedQuestions(count: number, userId?: string): Question[]
     const answeredQuestions = userStorage.getAnsweredQuestions();
     availableQuestions = combinedQuestions.filter(q => !answeredQuestions.has(q.id));
     
-    // إذا لم تكن هناك أسئلة متاحة كافية، أعد تعيين الأسئلة المجابة
+    // If there are not enough available questions, reset answered questions
     if (availableQuestions.length < count) {
       userStorage.resetAnsweredQuestions();
       availableQuestions = [...combinedQuestions];
@@ -106,7 +106,7 @@ export function getBalancedQuestions(count: number, userId?: string): Question[]
   return balancedQuestions.sort(() => 0.5 - Math.random());
 }
 
-// دالة للحصول على إحصائيات الأسئلة المتاحة
+// Function to get available questions statistics
 export function getAvailableQuestionsStats(userId?: string) {
   let availableQuestions = [...combinedQuestions];
   
@@ -133,7 +133,7 @@ export function getAvailableQuestionsStats(userId?: string) {
   };
 }
 
-// إحصائيات قاعدة البيانات المدمجة
+// Built-in database statistics
 export const questionStats = {
   total: combinedQuestions.length,
   originalQuestions: allQuestions.length,

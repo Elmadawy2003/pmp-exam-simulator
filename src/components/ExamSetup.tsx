@@ -33,47 +33,47 @@ export default function ExamSetup({ onStartExam, onBack }: ExamSetupProps) {
   const examOptions = [
     {
       type: 'quick' as const,
-      title: 'اختبار سريع',
-      description: 'مراجعة سريعة للمفاهيم الأساسية',
+      title: 'Quick Test',
+      description: 'Quick review of basic concepts',
       questionCount: 10,
       timeLimit: 15,
       difficulty: 'mixed' as const,
       icon: <Clock className="h-8 w-8 text-blue-600" />,
       color: 'bg-blue-50 border-blue-200 hover:bg-blue-100',
       features: [
-        'مراجعة سريعة',
-        'مناسب للمبتدئين',
-        'تغذية راجعة فورية'
+        'Quick review',
+        'Beginner friendly',
+        'Instant feedback'
       ]
     },
     {
       type: 'practice' as const,
-      title: 'اختبار تدريبي',
-      description: 'تدريب متوسط لتقييم المعرفة',
+      title: 'Practice Test',
+      description: 'Intermediate training to assess knowledge',
       questionCount: 30,
       timeLimit: 45,
       difficulty: 'mixed' as const,
       icon: <BookOpen className="h-8 w-8 text-green-600" />,
       color: 'bg-green-50 border-green-200 hover:bg-green-100',
       features: [
-        'تدريب شامل',
-        'تنوع في الصعوبة',
-        'إحصائيات مفصلة'
+        'Comprehensive training',
+        'Mixed difficulty',
+        'Detailed statistics'
       ]
     },
     {
       type: 'full' as const,
-      title: 'اختبار كامل',
-      description: 'محاكاة كاملة لامتحان PMP',
+      title: 'Full Exam',
+      description: 'Complete PMP exam simulation',
       questionCount: 60,
       timeLimit: 90,
       difficulty: 'mixed' as const,
       icon: <Target className="h-8 w-8 text-purple-600" />,
       color: 'bg-purple-50 border-purple-200 hover:bg-purple-100',
       features: [
-        'محاكاة حقيقية',
-        'جميع مجالات المعرفة',
-        'تقرير شامل'
+        'Real simulation',
+        'All knowledge areas',
+        'Comprehensive report'
       ]
     }
   ];
@@ -106,15 +106,15 @@ export default function ExamSetup({ onStartExam, onBack }: ExamSetupProps) {
               </Button>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-                  اختر نوع الاختبار
+                  Choose Exam Type
                 </h1>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  حدد مستوى التدريب المناسب لك
+                  Select the training level that suits you
                 </p>
               </div>
             </div>
             <Badge variant="secondary" className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-              240+ سؤال متاح
+              1000+ Questions Available
             </Badge>
           </div>
         </div>
@@ -152,7 +152,7 @@ export default function ExamSetup({ onStartExam, onBack }: ExamSetupProps) {
                         {option.questionCount}
                       </div>
                       <div className="text-xs text-gray-600 dark:text-gray-400">
-                        سؤال
+                        Questions
                       </div>
                     </div>
                     <div className="bg-white/50 dark:bg-gray-800/50 rounded-lg p-3">
@@ -160,7 +160,7 @@ export default function ExamSetup({ onStartExam, onBack }: ExamSetupProps) {
                         {option.timeLimit}
                       </div>
                       <div className="text-xs text-gray-600 dark:text-gray-400">
-                        دقيقة
+                        Minutes
                       </div>
                     </div>
                   </div>
@@ -179,7 +179,7 @@ export default function ExamSetup({ onStartExam, onBack }: ExamSetupProps) {
                   {selectedConfig?.examType === option.type && (
                     <div className="mt-4 p-3 bg-blue-100 dark:bg-blue-900 rounded-lg text-center">
                       <div className="text-blue-800 dark:text-blue-200 font-medium text-sm">
-                        ✓ تم الاختيار
+                        ✓ Selected
                       </div>
                     </div>
                   )}
@@ -194,7 +194,7 @@ export default function ExamSetup({ onStartExam, onBack }: ExamSetupProps) {
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
                   <Award className="h-5 w-5 text-blue-600" />
-                  <span>ملخص الاختبار المحدد</span>
+                  <span>Selected Exam Summary</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -204,7 +204,7 @@ export default function ExamSetup({ onStartExam, onBack }: ExamSetupProps) {
                       {selectedConfig.questionCount}
                     </div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">
-                      عدد الأسئلة
+                      Questions
                     </div>
                   </div>
                   <div className="space-y-2">
@@ -212,7 +212,7 @@ export default function ExamSetup({ onStartExam, onBack }: ExamSetupProps) {
                       {selectedConfig.timeLimit}
                     </div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">
-                      دقيقة
+                      Minutes
                     </div>
                   </div>
                   <div className="space-y-2">
@@ -220,7 +220,7 @@ export default function ExamSetup({ onStartExam, onBack }: ExamSetupProps) {
                       <TrendingUp className="h-8 w-8 mx-auto" />
                     </div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">
-                      صعوبة متنوعة
+                      Mixed Difficulty
                     </div>
                   </div>
                   <div className="space-y-2">
@@ -228,7 +228,7 @@ export default function ExamSetup({ onStartExam, onBack }: ExamSetupProps) {
                       <Users className="h-8 w-8 mx-auto" />
                     </div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">
-                      أسئلة عشوائية
+                      Random Questions
                     </div>
                   </div>
                 </div>
@@ -245,12 +245,12 @@ export default function ExamSetup({ onStartExam, onBack }: ExamSetupProps) {
               className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Target className="mr-2 h-6 w-6" />
-              ابدأ الاختبار الآن
+              Start Exam Now
             </Button>
             
             {!selectedConfig && (
               <p className="text-sm text-gray-500 dark:text-gray-400 mt-3">
-                يرجى اختيار نوع الاختبار أولاً
+                Please select an exam type first
               </p>
             )}
           </div>
@@ -263,10 +263,10 @@ export default function ExamSetup({ onStartExam, onBack }: ExamSetupProps) {
                   <CheckCircle className="h-6 w-6 text-blue-600 dark:text-blue-400" />
                 </div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  أسئلة عشوائية
+                  Random Questions
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  يتم اختيار الأسئلة بشكل عشوائي من قاعدة بيانات شاملة
+                  Questions are randomly selected from a comprehensive database
                 </p>
               </CardContent>
             </Card>
@@ -277,10 +277,10 @@ export default function ExamSetup({ onStartExam, onBack }: ExamSetupProps) {
                   <Clock className="h-6 w-6 text-green-600 dark:text-green-400" />
                 </div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  تغذية راجعة فورية
+                  Instant Feedback
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  احصل على الشرح والتوضيح فور الإجابة على كل سؤال
+                  Get explanations and clarifications immediately after answering each question
                 </p>
               </CardContent>
             </Card>
@@ -291,10 +291,10 @@ export default function ExamSetup({ onStartExam, onBack }: ExamSetupProps) {
                   <Award className="h-6 w-6 text-purple-600 dark:text-purple-400" />
                 </div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  تقرير مفصل
+                  Detailed Report
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  احصل على تحليل شامل لأدائك في نهاية الاختبار
+                  Get comprehensive analysis of your performance at the end of the exam
                 </p>
               </CardContent>
             </Card>

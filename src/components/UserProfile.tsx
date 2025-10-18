@@ -74,7 +74,7 @@ export default function UserProfile({ onBack }: UserProfileProps) {
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-400">جاري تحميل بيانات المستخدم...</p>
+          <p className="text-gray-600 dark:text-gray-400">Loading user data...</p>
         </div>
       </div>
     );
@@ -92,10 +92,10 @@ export default function UserProfile({ onBack }: UserProfileProps) {
               </Button>
               <div>
                 <h1 className="text-xl font-bold text-gray-900 dark:text-white">
-                  ملف المستخدم
+                  User Profile
                 </h1>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  إحصائيات وتقدم الأداء
+                  Statistics and Performance Progress
                 </p>
               </div>
             </div>
@@ -107,7 +107,7 @@ export default function UserProfile({ onBack }: UserProfileProps) {
                 className="flex items-center space-x-2"
               >
                 <RefreshCw className="h-4 w-4" />
-                <span>إعادة تعيين</span>
+                <span>Reset</span>
               </Button>
             </div>
           </div>
@@ -123,40 +123,40 @@ export default function UserProfile({ onBack }: UserProfileProps) {
             <CardHeader>
               <CardTitle className="flex items-center space-x-3">
                 <User className="h-6 w-6 text-blue-600" />
-                <span>معلومات المستخدم</span>
+                <span>User Information</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
                   <div className="text-2xl font-bold text-blue-600">{getDaysActive()}</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">أيام النشاط</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Active Days</div>
                 </div>
                 <div className="text-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
                   <div className="text-2xl font-bold text-green-600">{userStats.totalExamsCompleted}</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">اختبارات مكتملة</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Completed Exams</div>
                 </div>
                 <div className="text-center p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
                   <div className="text-2xl font-bold text-purple-600">{userStats.averageScore}%</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">متوسط النتائج</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Average Score</div>
                 </div>
               </div>
               
               <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                 <div>
-                  <span className="font-medium">تاريخ الإنشاء:</span>
+                  <span className="font-medium">Created Date:</span>
                   <span className="ml-2 text-gray-600 dark:text-gray-400">
                     {formatDate(userProfile.createdAt)}
                   </span>
                 </div>
                 <div>
-                  <span className="font-medium">آخر نشاط:</span>
+                  <span className="font-medium">Last Activity:</span>
                   <span className="ml-2 text-gray-600 dark:text-gray-400">
                     {formatDate(userProfile.lastActiveAt)}
                   </span>
                 </div>
                 <div>
-                  <span className="font-medium">معرف المستخدم:</span>
+                  <span className="font-medium">User ID:</span>
                   <span className="ml-2 text-gray-600 dark:text-gray-400 font-mono text-xs">
                     {userProfile.id}
                   </span>
@@ -170,7 +170,7 @@ export default function UserProfile({ onBack }: UserProfileProps) {
             <CardHeader>
               <CardTitle className="flex items-center space-x-3">
                 <BarChart3 className="h-6 w-6 text-green-600" />
-                <span>الإحصائيات العامة</span>
+                <span>Overall Statistics</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -178,25 +178,25 @@ export default function UserProfile({ onBack }: UserProfileProps) {
                 <div className="text-center p-4 border rounded-lg">
                   <Target className="h-8 w-8 text-blue-600 mx-auto mb-2" />
                   <div className="text-2xl font-bold">{userStats.totalQuestionsAnswered}</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">أسئلة مجاب عليها</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Questions Answered</div>
                 </div>
                 
                 <div className="text-center p-4 border rounded-lg">
                   <Trophy className="h-8 w-8 text-green-600 mx-auto mb-2" />
                   <div className="text-2xl font-bold">{userStats.totalCorrectAnswers}</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">إجابات صحيحة</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Correct Answers</div>
                 </div>
                 
                 <div className="text-center p-4 border rounded-lg">
                   <TrendingUp className="h-8 w-8 text-purple-600 mx-auto mb-2" />
                   <div className="text-2xl font-bold">{userStats.overallAccuracy}%</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">معدل الدقة</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Accuracy Rate</div>
                 </div>
                 
                 <div className="text-center p-4 border rounded-lg">
                   <Clock className="h-8 w-8 text-orange-600 mx-auto mb-2" />
                   <div className="text-2xl font-bold">{userStats.totalExamsCompleted}</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">اختبارات مكتملة</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Completed Exams</div>
                 </div>
               </div>
             </CardContent>
@@ -207,7 +207,7 @@ export default function UserProfile({ onBack }: UserProfileProps) {
             <CardHeader>
               <CardTitle className="flex items-center space-x-3">
                 <Settings className="h-6 w-6 text-orange-600" />
-                <span>التقدم حسب الفئة</span>
+                <span>Progress by Category</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -222,8 +222,8 @@ export default function UserProfile({ onBack }: UserProfileProps) {
                         </Badge>
                       </div>
                       <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400 mb-2">
-                        <span>{stats.correctAnswers} من {stats.totalQuestions} صحيح</span>
-                        <span>آخر محاولة: {formatDate(stats.lastAttempt)}</span>
+                        <span>{stats.correctAnswers} of {stats.totalQuestions} correct</span>
+                        <span>Last attempt: {formatDate(stats.lastAttempt)}</span>
                       </div>
                       <Progress value={stats.averageScore} className="h-2" />
                     </div>
@@ -233,7 +233,7 @@ export default function UserProfile({ onBack }: UserProfileProps) {
                 <div className="text-center py-8">
                   <Target className="h-12 w-12 text-gray-400 mx-auto mb-4" />
                   <p className="text-gray-600 dark:text-gray-400">
-                    لم تكمل أي اختبارات بعد. ابدأ اختبارك الأول لرؤية التقدم هنا!
+                    You haven&apos;t completed any exams yet. Start your first exam to see progress here!
                   </p>
                 </div>
               )}
@@ -247,10 +247,10 @@ export default function UserProfile({ onBack }: UserProfileProps) {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="font-medium text-red-800 dark:text-red-200">
-                      هل أنت متأكد من إعادة تعيين جميع البيانات؟
+                      Are you sure you want to reset all data?
                     </p>
                     <p className="text-sm text-red-600 dark:text-red-300 mt-1">
-                      سيتم حذف جميع الإحصائيات والتقدم نهائياً.
+                      All statistics and progress will be permanently deleted.
                     </p>
                   </div>
                   <div className="flex space-x-2">
@@ -259,14 +259,14 @@ export default function UserProfile({ onBack }: UserProfileProps) {
                       size="sm"
                       onClick={handleResetProgress}
                     >
-                      تأكيد
+                      Confirm
                     </Button>
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={() => setShowResetConfirm(false)}
                     >
-                      إلغاء
+                      Cancel
                     </Button>
                   </div>
                 </div>

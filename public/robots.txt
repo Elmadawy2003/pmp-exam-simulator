@@ -1,8 +1,30 @@
+# Free PMP Exam Simulator - Robots.txt
+# محاكاة اختبار PMP مجانًا
+
 User-agent: *
 Allow: /
+Allow: /exam
+Allow: /practice
+Allow: /results
+Allow: /thank-you
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.svg
+Allow: /*.ico
 
-# Sitemap
+# Disallow admin or private areas (if any)
+Disallow: /api/
+Disallow: /_next/static/
+Disallow: /admin/
+
+# Sitemap locations
 Sitemap: https://pmp-exam-simulator.vercel.app/sitemap.xml
+Sitemap: https://pmp-exam-simulator.vercel.app/sitemap-index.xml
 
-# Crawl-delay
+# Crawl-delay for respectful crawling
 Crawl-delay: 1
+
+# Host directive
+Host: https://pmp-exam-simulator.vercel.app

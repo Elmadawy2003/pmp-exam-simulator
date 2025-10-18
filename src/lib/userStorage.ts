@@ -1,4 +1,4 @@
-// نظام إدارة بيانات المستخدم في localStorage
+// User data management system in localStorage
 export interface UserProfile {
   id: string;
   name?: string;
@@ -9,8 +9,8 @@ export interface UserProfile {
 
 export interface UserProgress {
   userId: string;
-  answeredQuestions: Set<string>; // معرفات الأسئلة التي تم الإجابة عليها
-  correctAnswers: Set<string>; // معرفات الأسئلة التي تم الإجابة عليها بشكل صحيح
+  answeredQuestions: Set<string>; // IDs of answered questions
+  correctAnswers: Set<string>; // IDs of correctly answered questions
   examHistory: ExamRecord[];
   totalExamsCompleted: number;
   averageScore: number;
@@ -30,7 +30,7 @@ export interface ExamRecord {
   score: number;
   totalQuestions: number;
   correctAnswers: number;
-  timeSpent: number; // بالدقائق
+  timeSpent: number; // in minutes
   questionIds: string[];
   categoryBreakdown: { [category: string]: { total: number; correct: number } };
 }
@@ -39,16 +39,16 @@ export class UserStorageManager {
   private readonly USER_PROFILE_KEY = 'pmp_user_profile';
   private readonly USER_PROGRESS_KEY = 'pmp_user_progress';
 
-  // الحصول على معرف المستخدم الحالي
+  // Get current user ID
   getCurrentUserId(): string {
     const profile = this.getUserProfile();
     return profile.id;
   }
 
-  // إنشاء أو الحصول على ملف المستخدم
+  // Create or get user profile
   getUserProfile(): UserProfile {
     if (typeof window === 'undefined') {
-      // في حالة Server-side rendering
+      // In case of Server-side rendering
       return this.createNewUser();
     }
 
@@ -58,7 +58,7 @@ export class UserStorageManager {
       profile.createdAt = new Date(profile.createdAt);
       profile.lastActiveAt = new Date(profile.lastActiveAt);
       
-      // تحديث آخر نشاط
+      // Update last activity
       profile.lastActiveAt = new Date();
       this.saveUserProfile(profile);
       
@@ -68,7 +68,7 @@ export class UserStorageManager {
     return this.createNewUser();
   }
 
-  // إنشاء مستخدم جديد
+  // Create new user
   private createNewUser(): UserProfile {
     const newUser: UserProfile = {
       id: this.generateUserId(),
@@ -82,14 +82,14 @@ export class UserStorageManager {
     return newUser;
   }
 
-  // حفظ ملف المستخدم
+  // Save user profile
   saveUserProfile(profile: UserProfile): void {
     if (typeof window !== 'undefined') {
       localStorage.setItem(this.USER_PROFILE_KEY, JSON.stringify(profile));
     }
   }
 
-  // الحصول على تقدم المستخدم
+  // Get user progress
   getUserProgress(): UserProgress {
     if (typeof window === 'undefined') {
       return this.createEmptyProgress();
@@ -99,17 +99,17 @@ export class UserStorageManager {
     if (stored) {
       const progress = JSON.parse(stored);
       
-      // تحويل المصفوفات إلى Set
+      // Convert arrays to Set
       progress.answeredQuestions = new Set(progress.answeredQuestions || []);
       progress.correctAnswers = new Set(progress.correctAnswers || []);
       
-      // تحويل التواريخ
+      // Convert dates
       progress.examHistory = progress.examHistory.map((exam: ExamRecord) => ({
         ...exam,
         date: new Date(exam.date)
       }));
 
-      // تحويل تواريخ تقدم الفئات
+      // Convert category progress dates
       Object.keys(progress.categoryProgress || {}).forEach(category => {
         if (progress.categoryProgress[category].lastAttempt) {
           progress.categoryProgress[category].lastAttempt = new Date(progress.categoryProgress[category].lastAttempt);
@@ -122,7 +122,7 @@ export class UserStorageManager {
     return this.createEmptyProgress();
   }
 
-  // إنشاء تقدم فارغ للمستخدم الجديد
+  // Create empty progress for new user
   private createEmptyProgress(): UserProgress {
     const userProfile = this.getUserProfile();
     return {
@@ -136,7 +136,7 @@ export class UserStorageManager {
     };
   }
 
-  // تهيئة تقدم المستخدم
+  // Initialize user progress
   private initializeUserProgress(userId: string): void {
     const progress: UserProgress = {
       userId,
@@ -151,10 +151,10 @@ export class UserStorageManager {
     this.saveUserProgress(progress);
   }
 
-  // حفظ تقدم المستخدم
+  // Save user progress
   saveUserProgress(progress: UserProgress): void {
     if (typeof window !== 'undefined') {
-      // تحويل Set إلى مصفوفة للتخزين
+      // Convert Set to array for storage
       const progressToSave = {
         ...progress,
         answeredQuestions: Array.from(progress.answeredQuestions),
@@ -165,24 +165,24 @@ export class UserStorageManager {
     }
   }
 
-  // إضافة سجل اختبار جديد
+  // Add new exam record
   addExamRecord(examRecord: ExamRecord): void {
     const progress = this.getUserProgress();
     
-    // إضافة الأسئلة المجاب عليها
+    // Add answered questions
     examRecord.questionIds.forEach(questionId => {
       progress.answeredQuestions.add(questionId);
     });
 
-    // إضافة سجل الاختبار
+    // Add exam record
     progress.examHistory.push(examRecord);
     progress.totalExamsCompleted++;
 
-    // حساب المتوسط الجديد
+    // Calculate new average
     const totalScore = progress.examHistory.reduce((sum, exam) => sum + exam.score, 0);
     progress.averageScore = Math.round(totalScore / progress.examHistory.length);
 
-    // تحديث تقدم الفئات
+    // Update category progress
     Object.keys(examRecord.categoryBreakdown).forEach(category => {
       const categoryData = examRecord.categoryBreakdown[category];
       
@@ -205,32 +205,32 @@ export class UserStorageManager {
     this.saveUserProgress(progress);
   }
 
-  // إضافة إجابة صحيحة
+  // Add correct answer
   addCorrectAnswer(questionId: string): void {
     const progress = this.getUserProgress();
     progress.correctAnswers.add(questionId);
     this.saveUserProgress(progress);
   }
 
-  // التحقق من إجابة سؤال سابقاً
+  // Check if question was answered before
   hasAnsweredQuestion(questionId: string): boolean {
     const progress = this.getUserProgress();
     return progress.answeredQuestions.has(questionId);
   }
 
-  // الحصول على الأسئلة غير المجاب عليها
+  // Get unanswered questions
   getUnansweredQuestionIds(allQuestionIds: string[]): string[] {
     const progress = this.getUserProgress();
     return allQuestionIds.filter(id => !progress.answeredQuestions.has(id));
   }
 
-  // الحصول على الأسئلة المجاب عليها
+  // Get answered questions
   getAnsweredQuestions(): Set<string> {
     const progress = this.getUserProgress();
     return progress.answeredQuestions;
   }
 
-  // تسجيل إجابة سؤال
+  // Record question answer
   recordAnswer(questionId: string, isCorrect: boolean): void {
     const progress = this.getUserProgress();
     progress.answeredQuestions.add(questionId);
@@ -240,7 +240,7 @@ export class UserStorageManager {
     this.saveUserProgress(progress);
   }
 
-  // إعادة تعيين الأسئلة المجاب عليها
+  // Reset answered questions
   resetAnsweredQuestions(): void {
     const progress = this.getUserProgress();
     progress.answeredQuestions.clear();
@@ -248,18 +248,18 @@ export class UserStorageManager {
     this.saveUserProgress(progress);
   }
 
-  // حفظ سجل الاختبار
+  // Save exam record
   saveExamRecord(examRecord: ExamRecord): void {
     this.addExamRecord(examRecord);
   }
 
-  // إعادة تعيين تقدم المستخدم
+  // Reset user progress
   resetUserProgress(): void {
     const userProfile = this.getUserProfile();
     this.initializeUserProgress(userProfile.id);
   }
 
-  // حذف جميع البيانات
+  // Clear all data
   clearAllData(): void {
     if (typeof window !== 'undefined') {
       localStorage.removeItem(this.USER_PROFILE_KEY);
@@ -267,12 +267,12 @@ export class UserStorageManager {
     }
   }
 
-  // توليد معرف مستخدم فريد
+  // Generate unique user ID
   private generateUserId(): string {
     return 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
   }
 
-  // الحصول على إحصائيات المستخدم
+  // Get user statistics
   getUserStats(): {
     totalQuestionsAnswered: number;
     totalCorrectAnswers: number;
@@ -296,5 +296,5 @@ export class UserStorageManager {
   }
 }
 
-// إنشاء instance واحد للاستخدام في التطبيق
+// Create a single instance for use in the application
 export const userStorage = new UserStorageManager();

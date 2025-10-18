@@ -228,21 +228,29 @@ export default function ExamResults({ result, onRetakeExam, onBackToHome }: Exam
           </div>
 
           {/* Action Buttons */}
-          <div className="flex justify-center space-x-4 pt-6">
+          <div className="flex flex-wrap justify-center gap-4 pt-6">
             <Button 
               variant="outline" 
               onClick={onBackToHome}
-              className="px-8 py-3"
+              className="px-6 py-3"
             >
               <Home className="h-4 w-4 mr-2" />
               Back to Home
             </Button>
             <Button 
               onClick={onRetakeExam}
-              className="bg-blue-600 hover:bg-blue-700 px-8 py-3"
+              className="bg-blue-600 hover:bg-blue-700 px-6 py-3"
             >
               <RotateCcw className="h-4 w-4 mr-2" />
               Take Another Practice Test
+            </Button>
+            <Button 
+              variant="outline"
+              onClick={() => window.open('/thank-you', '_blank')}
+              className="px-6 py-3 border-green-300 text-green-700 hover:bg-green-50 dark:border-green-600 dark:text-green-400 dark:hover:bg-green-900/20"
+            >
+              <BookOpen className="h-4 w-4 mr-2" />
+              Share & Recommend
             </Button>
           </div>
         </div>

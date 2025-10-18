@@ -19,13 +19,13 @@ interface ExamComponentProps {
 }
 
 export default function ExamComponent({ onExamEnd, examConfig }: ExamComponentProps) {
-  // إنشاء أو الحصول على معرف المستخدم
+  // Create or get user ID
   const [userId] = useState(() => {
     const userStorage = new UserStorageManager();
     return userStorage.getCurrentUserId();
   });
 
-  // إنشاء الأسئلة بناءً على إعدادات الاختبار مع تجنب التكرار
+  // Generate questions based on exam settings while avoiding repetition
   const generateQuestions = (): Question[] => {
     if (examConfig.difficulty === 'mixed') {
       return getBalancedQuestions(examConfig.questionCount, userId);
@@ -117,7 +117,7 @@ export default function ExamComponent({ onExamEnd, examConfig }: ExamComponentPr
       
       if (isCorrect) correctAnswers++;
       
-      // تسجيل الإجابة في نظام التتبع
+      // Record answer in tracking system
       userStorage.recordAnswer(question.id, isCorrect);
       
       if (!categoryBreakdown[question.category]) {
@@ -135,7 +135,7 @@ export default function ExamComponent({ onExamEnd, examConfig }: ExamComponentPr
       categoryBreakdown
     };
 
-    // حفظ نتيجة الاختبار
+    // Save exam result
     userStorage.saveExamRecord({
       id: `exam_${Date.now()}`,
       date: new Date(),

@@ -1380,7 +1380,7 @@ export const sampleQuestions: Question[] = [
       'Schedule baseline',
       'Cost baseline',
       'Schedule management plan',
-      'Schedule data Correct Choic e : 4',
+      'Schedule data',
     ],
     correctAnswer: 1,
     explanation: 'Determine Budget is the process of aggregating the estimated costs of individual activities or work packages to establish an authorized cost baseline. Resource calendars are inputs to this process.',
